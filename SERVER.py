@@ -13,7 +13,7 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
 def handle_client(conn, addr):
-    print(f"[NEW CONNECTION] {addr} Online.")
+    print(f"[NEW CONNECTION] {addr[0]} Online at Port: [{addr[1]}].")
 
     connected = True
     while connected:
@@ -21,9 +21,9 @@ def handle_client(conn, addr):
         if msg_len:
             msg_len = int(msg_len)
             msg = conn.recv(msg_len).decode(FORMAT)
-            print(f"[{addr}] : {msg}")
+            print(f"[{addr[0]}] : {msg}")
             if msg == DISCONNECT_MSG:
-                print(f"[DISCONNECTE!] : {addr} is offline now!")
+                print(f"[DISCONNECTED!] : {addr[0]} is offline now!")
                 connected = False
                 
 
